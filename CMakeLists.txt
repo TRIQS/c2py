@@ -53,11 +53,6 @@ execute_process(COMMAND ${GIT_EXECUTABLE} rev-parse HEAD
 message(STATUS "${PROJECT_NAME} version : ${PROJECT_VERSION}")
 message(STATUS "${PROJECT_NAME} Git hash: ${PROJECT_GIT_HASH}")
 
-if(NOT NO_GENERATION)
-  message( STATUS "-------- clang detection -------------")
-  include(clang_detection)
-endif()
-
 # --- Python ---
 find_package(Python COMPONENTS Interpreter Development NumPy)
 
@@ -140,10 +135,6 @@ if(NOT IS_SUBPROJECT
   AND NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr/local"
 )
   # Configure and install the file to source to setup the environment variables
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/c2pyvars.sh.in ${CMAKE_CURRENT_BINARY_DIR}/c2pyvars.sh @ONLY)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/c2py.modulefile.in ${CMAKE_CURRENT_BINARY_DIR}/c2py.modulefile @ONLY)
-
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/c2pyvars.sh DESTINATION share/c2py)
   message(STATUS "***************************************************************")
   message(STATUS "* Use :                                                        ")
   message(STATUS "*   source ${CMAKE_INSTALL_PREFIX}/share/c2py/c2pyvars.sh  ")
