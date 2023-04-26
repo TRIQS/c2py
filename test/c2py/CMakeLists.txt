@@ -1,14 +1,12 @@
 FILE(COPY ${CMAKE_SOURCE_DIR}/.clang-format DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 #find_package(sanitizer REQUIRED "asan")
-MESSAGE("SANITIZER_RT_PRELOAD = ${SANITIZER_RT_PRELOAD}")
-
-SET(MODULE_EXTENSION "wrap.cxx")
+#MESSAGE("SANITIZER_RT_PRELOAD = ${SANITIZER_RT_PRELOAD}")
 
 macro(add_test_py1 modulename module_extension) 
 
   Python_add_library( ${modulename} MODULE "${modulename}.${module_extension}")
-  target_compile_options(${modulename} PRIVATE ${ARGN} -std=c++20)
+  target_compile_options(${modulename} PRIVATE -std=c++20)
   target_include_directories(${modulename} SYSTEM PRIVATE  ${CMAKE_SOURCE_DIR}/src)
   target_link_libraries(${modulename} PRIVATE c2py ${PROJECT_NAME}_warnings itertools::itertools_c Python::NumPy)
 
@@ -26,7 +24,8 @@ endif()
 endmacro()
 
 macro(add_test_py modulename)
-  add_test_py1(${modulename} ${MODULE_EXTENSION} ${PLUGIN_OPTION})
+  add_test_py1(${modulename} $<IF:$<TARGET_EXISTS:clair::c2py>,cpp,wrap.cxx> $<TARGET_NAME_IF_EXISTS:clair::c2py>)
+  target_link_libraries(${modulename} PRIVATE $<TARGET_NAME_IF_EXISTS:clair::c2py>)
 endmacro()
 
 # ----------------------------

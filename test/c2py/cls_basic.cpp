@@ -33,6 +33,8 @@ struct A {
 
   int prop1() const { return k; }
 
+  void no_prop() { k *= 10; }
+
   //C2PY_PROPERTY("p")
   //int get_prop() const { return k; }
   //C2PY_PROPERTY_SETTER("p")

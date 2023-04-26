@@ -33,6 +33,11 @@ class TestIterable(unittest.TestCase):
         def f(x): 
             del x.prop1
         self.assertRaises(AttributeError, f, a)
+        a.no_prop
+        self.assertEqual(a.k,  17)
+        a.no_prop() # should not be prop ... 
+        self.assertEqual(a.k,  170)
+        print(a.no_prop)
 
    def test_iter(self):
         a = M.A(3)

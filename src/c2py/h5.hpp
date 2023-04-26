@@ -25,6 +25,7 @@ namespace c2py {
       } catch (std::exception const &e) {
         auto err = std::string(".. Error  : \n") + e.what() + "\nin h5 reading of object of type " + typeid(T).name();
         PyErr_SetString(PyExc_RuntimeError, err.c_str());
+        throw "Error";
       }
     };
     return {reader};
