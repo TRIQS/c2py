@@ -28,6 +28,17 @@ macro(add_test_py modulename)
   target_link_libraries(${modulename} PRIVATE $<TARGET_NAME_IF_EXISTS:clair::c2py>)
 endmacro()
 
+#--------------------------------------------------------
+#  A target to copy the wrap.cxx files back to the src
+#--------------------------------------------------------
+
+add_custom_target(c2py_copy_wrap_cxx_to_src)
+add_custom_command(
+  TARGET c2py_copy_wrap_cxx_to_src
+  COMMAND cp ${CMAKE_CURRENT_BINARY_DIR}/*.wrap.cxx ${CMAKE_CURRENT_SOURCE_DIR}
+  COMMAND echo "** Copying all wrap.cxx to c2py test"
+)
+
 # ----------------------------
 # Non generated test. Low level only
 add_test_py1(cls "cxx" )
