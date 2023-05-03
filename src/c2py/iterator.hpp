@@ -77,7 +77,29 @@ namespace c2py {
         0,                                                   // tp_richcompare
         0,                                                   // tp_weaklistoffset
         tp_iter_iterator<Iterator, Sentinel>,                // tp_iter: __iter__() method
-        tp_iterator_iternext<Iterator, Sentinel>             // tp_iternext: next() method
+        tp_iterator_iternext<Iterator, Sentinel>,            // tp_iternext: next() method
+        0,                                                   // tp_methods
+        0,                                                   // tp_members
+        0,                                                   // tp_getset
+        0,                                                   // tp_base
+        0,                                                   // tp_dict
+        0,                                                   // tp_descr_get
+        0,                                                   // tp_descr_set
+        0,                                                   // tp_dictoffset
+        0,                                                   // tp_init
+        0,                                                   // tp_alloc
+        0,                                                   // tp_new
+        0,                                                   // tp_free
+        0,                                                   // tp_is_gc
+        0,                                                   // tp_bases
+        0,                                                   // tp_mro
+        0,                                                   // [tp_cache
+        0,                                                   // tp_subclasses
+        0,                                                   // tp_weaklist
+        0,                                                   // tp_del
+        0,                                                   // tp_version_tag
+        0,                                                   // tp_finalize
+        0,                                                   // tp_vectorcall
   };
 
   // ---------------------------------------

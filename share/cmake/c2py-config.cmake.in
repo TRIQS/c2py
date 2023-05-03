@@ -23,4 +23,6 @@ include(@CMAKE_INSTALL_PREFIX@/lib/cmake/c2py/c2py-targets.cmake)
 
 #SET(C2PY_C2PY_MODULE_EXTENSION "wrap.cxx")
 
+add_library(c2py::c2py ALIAS c2py)
+
 endif()

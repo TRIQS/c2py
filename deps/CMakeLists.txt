@@ -47,13 +47,6 @@ else()
   endif()
 endif()
 
-# -- GTest --
-external_dependency(GTest
-  GIT_REPO https://github.com/google/googletest
-  GIT_TAG release-1.12.1
-  BUILD_ALWAYS
-  EXCLUDE_FROM_ALL
-)
 
 # -- itertools --
 external_dependency(itertools

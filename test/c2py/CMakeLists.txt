@@ -3,7 +3,7 @@ FILE(COPY ${CMAKE_SOURCE_DIR}/.clang-format DESTINATION ${CMAKE_CURRENT_BINARY_D
 #find_package(sanitizer REQUIRED "asan")
 #MESSAGE("SANITIZER_RT_PRELOAD = ${SANITIZER_RT_PRELOAD}")
 
-macro(add_test_py1 modulename module_extension) 
+macro(c2py_add_test_1 modulename module_extension) 
 
   Python_add_library( ${modulename} MODULE "${modulename}.${module_extension}")
   target_compile_options(${modulename} PRIVATE -std=c++20)
@@ -23,9 +23,9 @@ endif()
   set_property(TEST ${modulename}_py APPEND PROPERTY ENVIRONMENT PYTHONPATH=${h5_BINARY_DIR}/python:${CMAKE_CURRENT_BINARY_DIR}:$ENV{PYTHONPATH} ${SANITIZER_RT_PRELOAD})
 endmacro()
 
-macro(add_test_py modulename)
-  add_test_py1(${modulename} $<IF:$<TARGET_EXISTS:clair::c2py>,cpp,wrap.cxx> $<TARGET_NAME_IF_EXISTS:clair::c2py>)
-  target_link_libraries(${modulename} PRIVATE $<TARGET_NAME_IF_EXISTS:clair::c2py>)
+macro(c2py_add_test modulename)
+c2py_add_test_1(${modulename} $<IF:$<TARGET_EXISTS:clair::c2py_plugin>,cpp,wrap.cxx> $<TARGET_NAME_IF_EXISTS:clair::c2py_plugin>)
+  target_link_libraries(${modulename} PRIVATE $<TARGET_NAME_IF_EXISTS:clair::c2py_plugin>)
 endmacro()
 
 #--------------------------------------------------------
@@ -40,28 +40,15 @@ add_custom_command(
 )
 
 # ----------------------------
-# Non generated test. Low level only
-add_test_py1(cls "cxx" )
+set(c2py_all_low_level_tests cls cls_der CACHE INTERNAL "")
+set(c2py_all_full_tests  basicfun cls_basic comparison issue9 callables itertool enumcxx synth_init tpl_cls tpl_derived CACHE INTERNAL "")
 
-# Full tests
-add_test_py(basicfun)
-add_test_py(cls_basic)
-add_test_py(comparison)
-add_test_py(issue9)
-add_test_py(callables)
+foreach(t ${c2py_all_low_level_tests} )
+  c2py_add_test_1(${t} "cxx")  
+endforeach()
 
-add_test_py(itertool)
-add_test_py(enumcxx)
-add_test_py(synth_init)
-
-add_test_py(tpl_cls)
-add_test_py(tpl_derived)
-
-#add_test_py(h5_storable)
-#get_target_property(H5_INCDIR h5_c INTERFACE_INCLUDE_DIRECTORIES)
-#target_include_directories(h5_storable SYSTEM PRIVATE  ${H5_INCDIR})
-#target_link_libraries(h5_storable PRIVATE h5_c)
-#add_dependencies(h5_storable _h5py)
-
+foreach(t ${c2py_all_full_tests} )
+  c2py_add_test(${t})
+endforeach()
 
 

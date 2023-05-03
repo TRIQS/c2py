@@ -1,8 +1,10 @@
 //#pragma GCC visibility push(hidden)
 //#pragma CLANG visibility push(hidden)
-#pragma clang diagnostic push
+
+#ifdef __clang__
 #pragma clang diagnostic ignored "-W#warnings"
-//#pragma clang diagnostic pop
+#pragma clang diagnostic ignored "-Wmissing-field-initializers"
+#endif
 
 //#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 
@@ -80,7 +82,7 @@ static PyObject *prop_get_A_1(PyObject *self, void *) {
   return ovs(self, nullptr, nullptr);
 }
 
-static int prop_set_A_1(PyObject *self, PyObject *value, void *closure) {
+static int prop_set_A_1(PyObject *self, PyObject *value, void *) {
   if (value == NULL) return (PyErr_SetString(PyExc_AttributeError, "Cannot delete the attribute p of object A"), -1);
   static dispatcher_f_kw_t ovs = {cfun(&A::set_prop, "i")};
   ovs(self, pyref(PyTuple_Pack(1, value)), nullptr);

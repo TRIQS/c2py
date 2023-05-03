@@ -16,7 +16,7 @@ target_link_libraries(c2py_obj PUBLIC Python::NumPy Python::Python)
 # shared and static libraries built from the same object files
 add_library(c2py_dyn SHARED $<TARGET_OBJECTS:c2py_obj>)
 add_library(c2py STATIC $<TARGET_OBJECTS:c2py_obj>)
-#add_library(clair::c2py ALIAS c2py)
+add_library(c2py::c2py ALIAS c2py)
 
 target_include_directories(c2py
   PUBLIC
