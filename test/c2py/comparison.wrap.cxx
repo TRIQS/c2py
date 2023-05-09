@@ -1,7 +1,9 @@
 
 // C.f. https://numpy.org/doc/1.21/reference/c-api/array.html#importing-the-api
 #define PY_ARRAY_UNIQUE_SYMBOL _cpp2py_ARRAY_API
+#ifdef __clang__
 #pragma clang diagnostic ignored "-W#warnings"
+#endif
 #include "comparison.cpp"
 #include "c2py/c2py.hpp"
 
