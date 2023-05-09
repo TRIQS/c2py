@@ -131,7 +131,7 @@ PyMethodDef c2py::tp_methods<N1::params_ndc>[] = {
 
 constexpr auto doc_member_5  = R"DOC(/// An int)DOC";
 constexpr auto doc_member_6  = R"DOC(/// A double)DOC";
-constexpr auto doc_member_7  = R"DOC(/// A non default constructible object )DOC";
+constexpr auto doc_member_7  = R"DOC(/// A non default constructible object)DOC";
 constexpr auto doc_member_8  = R"DOC(/// A non default constructible object with a default init)DOC";
 constexpr auto doc_member_9  = R"DOC(/// A vector of int)DOC";
 constexpr auto doc_member_10 = R"DOC()DOC";

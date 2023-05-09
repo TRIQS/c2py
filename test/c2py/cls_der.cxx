@@ -1,7 +1,11 @@
 //#pragma GCC visibility push(hidden)
 //#pragma CLANG visibility push(hidden)
+#ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-W#warnings"
+#pragma clang diagnostic ignored "-Wmissing-field-initializers"
+#endif
+
 //#pragma clang diagnostic pop
 
 //#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION

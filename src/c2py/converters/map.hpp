@@ -19,9 +19,12 @@
 #pragma once
 #include <map>
 #include "./traits.hpp"
-#include "../pyref.hpp"
+#include "../py_converter.hpp"
+#include "../cpp_name.hpp"
 
 namespace c2py {
+
+  template <typename K, typename V> inline const std::string cpp_name<std::map<K, V>> = "std::map";
 
   template <typename K, typename V> struct py_converter<std::map<K, V>> {
 
@@ -44,7 +47,7 @@ namespace c2py {
 
         if (k.is_null() or v.is_null() or (PyDict_SetItem(d, k, v) == -1)) {
           Py_DECREF(d);
-          return NULL;
+          return nullptr;
         } // error
       }
       return d;
@@ -53,14 +56,14 @@ namespace c2py {
     // ----------------------------------------------
 
     static bool is_convertible(PyObject *ob, bool raise_exception) {
-      if (!PyDict_Check(ob)) goto _false;
+      if (!PyDict_Check(ob)) goto _false; //NOLINT
       {
         pyref keys   = PyDict_Keys(ob);
         pyref values = PyDict_Values(ob);
-        int len      = PyDict_Size(ob);
+        long len     = PyDict_Size(ob);
         for (int i = 0; i < len; i++) {
-          if (!py_converter<K>::is_convertible(PyList_GET_ITEM((PyObject *)keys, i), raise_exception)) goto _false;   //borrowed ref
-          if (!py_converter<V>::is_convertible(PyList_GET_ITEM((PyObject *)values, i), raise_exception)) goto _false; //borrowed ref
+          if (!py_converter<K>::is_convertible(PyList_GET_ITEM((PyObject *)keys, i), raise_exception)) goto _false;   // NOLINT borrowed ref
+          if (!py_converter<V>::is_convertible(PyList_GET_ITEM((PyObject *)values, i), raise_exception)) goto _false; // NOLINT borrowed ref
         }
         return true;
       }
@@ -75,8 +78,8 @@ namespace c2py {
       pyref keys   = PyDict_Keys(ob);
       pyref values = PyDict_Values(ob);
       std::map<K, V> res;
-      int len = PyDict_Size(ob);
-      for (int i = 0; i < len; i++)
+      long len = PyDict_Size(ob);
+      for (long i = 0; i < len; i++)
         res.emplace(py_converter<K>::py2c(PyList_GET_ITEM((PyObject *)keys, i)),    //borrowed ref
                     py_converter<V>::py2c(PyList_GET_ITEM((PyObject *)values, i))); //borrowed ref
       return res;

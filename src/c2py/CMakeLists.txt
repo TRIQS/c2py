@@ -28,7 +28,6 @@ target_include_directories(c2py
 target_link_libraries(c2py_dyn PUBLIC Python::NumPy Python::Python)
 target_link_libraries(c2py PUBLIC Python::NumPy Python::Python)
 
-
 # Install the library in lib and export the c2py target
 install(TARGETS c2py c2py_dyn EXPORT c2py-targets DESTINATION lib)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h")

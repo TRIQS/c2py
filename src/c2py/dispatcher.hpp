@@ -3,11 +3,6 @@
 #include "pycfun_kw.hpp"
 namespace c2py {
 
-  // ====================== a specific exception ============
-  // A C++ exception raised when a Python function called by C++
-  // has raised an exception
-  struct exception_raised_in_python {};
-
   // =============== dynamic dispatcher ========================
 
   // Gather a set of overload and handle the calls and error reporting

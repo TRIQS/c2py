@@ -1,5 +1,9 @@
-#include "./c2py.hpp"
-#include "./signal_handler.hpp"
+#include "pycfun_kw.hpp"
+//NOLINTNEXTLINE
+//#include "./c2py.hpp"
+//#include "./signal_handler.hpp"
+
+using c2py::exception_raised_in_python;
 
 bool c2py::pycfun_kw::is_callable(PyObject *, PyObject *args, PyObject *kwargs, bool raise_exception) const noexcept {
 
@@ -110,7 +114,7 @@ PyObject *c2py::pycfun_kw::operator()(PyObject *self, PyObject *args, PyObject *
   // If the exception was raised in a python callback
   // this exception is raised in C++ by callable
   // we should simply do nothing and let python continue
-  catch (c2py::exception_raised_in_python const &e) {
+  catch (exception_raised_in_python const &e) {
     if (not PyErr_Occurred()) {
       std::cerr << "LOGIC ERROR : Python exception should be raised by now ...";
       std::terminate();
@@ -119,7 +123,10 @@ PyObject *c2py::pycfun_kw::operator()(PyObject *self, PyObject *args, PyObject *
   } catch (std::exception const &e) {
     auto err = std::string(".. Error  : \n") + e.what();
     PyErr_SetString(PyExc_RuntimeError, err.c_str());
-  }
+  } catch (const char *e) {
+    auto err = std::string(".. Error  : \n") + e;
+    PyErr_SetString(PyExc_RuntimeError, err.c_str());
+  } catch (...) { PyErr_SetString(PyExc_RuntimeError, "Unknown exception in C++"); }
   return nullptr;
 }
 

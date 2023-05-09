@@ -6,6 +6,11 @@
 
 namespace c2py {
 
+  // ====================== a specific exception ============
+  // A C++ exception raised when a Python function called by C++
+  // has raised an exception
+  struct exception_raised_in_python {};
+
   // ===================== nv_pair ===========================
   // A simple pair name, value, with the literal operator to form it
   // "abc"_a = X  returns a nv_pair with name = "abc" and default_value = X

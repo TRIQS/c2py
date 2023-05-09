@@ -8,11 +8,11 @@
 namespace N1 {
 
   struct A_ndc {
-    int u; 
-    A_ndc(int i): u(i) {}
+    int u;
+    A_ndc(int i) : u(i) {}
     bool operator==(A_ndc const &) const = default;
   };
-  
+
   struct params {
 
     /// An int
@@ -24,7 +24,7 @@ namespace N1 {
     /// A vector of int
     std::vector<int> v;
 
-    std::vector<int> w = {1,2,3};
+    std::vector<int> w = {1, 2, 3};
 
     //std::vector<int> get() { return v;}
   };
@@ -38,7 +38,7 @@ namespace N1 {
     /// A double
     double x = 10;
 
-    /// A non default constructible object 
+    /// A non default constructible object
     A_ndc ndc1;
 
     /// A non default constructible object with a default init
@@ -47,30 +47,13 @@ namespace N1 {
     /// A vector of int
     std::vector<int> v;
 
-    std::vector<int> w = {1,2,3};
-    
- };
+    std::vector<int> w = {1, 2, 3};
+  };
 
   // double pr(params const &p) { return p.x; }
 
-
 } // namespace N1
-
 
 // =============== Declare module ===========================
 
-namespace c2py_module {
-  
-   template<> struct wrap_info<N1::params> {
-     static constexpr auto synthetize_init_from_pydict = true;
-     static constexpr auto synthetize_dict_attribute = true;
-   };
-
-
-   template<> struct wrap_info<N1::params_ndc> {
-     static constexpr auto synthetize_init_from_pydict = true;
-     static constexpr auto synthetize_dict_attribute = true;
-   };
-
-}
-
+namespace c2py_module {} // namespace c2py_module

@@ -18,7 +18,6 @@
 
 #pragma once
 #include "../py_converter.hpp"
-#include "./complex.hpp"
 
 #include <cstddef>
 
