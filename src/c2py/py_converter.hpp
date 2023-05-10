@@ -59,13 +59,6 @@ namespace c2py {
   // in the module being compiled or in another one ...
   template <typename T> static constexpr bool is_wrapped = false; // default
 
-  // FIXME : move to .hxx in h5.hpp
-
-#ifdef H5_INTERFACE_INCLUDED
-  template <> constexpr bool is_wrapped<h5::group> = true;
-  template <> constexpr bool is_wrapped<h5::file>  = true;
-#endif
-
   //---------------------  py_converters -----------------------------
 
   template <typename T> struct merged_into {

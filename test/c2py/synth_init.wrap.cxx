@@ -23,7 +23,7 @@ template <> inline const std::string c2py::cpp_name<N1::A_ndc>   = "N1::A_ndc";
 template <> inline constexpr auto c2py::tp_name<N1::A_ndc>       = "synth_init.ANdc";
 template <> inline constexpr const char *c2py::tp_doc<N1::A_ndc> = R"DOC(   )DOC";
 
-static auto init_0 = c2py::dispatcher_c_kw_t{c2py::c_constructor<N1::A_ndc, int>("i")};
+static auto init_0                                      = c2py::dispatcher_c_kw_t{c2py::c_constructor<N1::A_ndc, int>("i")};
 template <> constexpr initproc c2py::tp_init<N1::A_ndc> = c2py::pyfkw_constructor<init_0>;
 
 // ----- Method table ----
@@ -38,10 +38,9 @@ constexpr auto doc_member_0 = R"DOC()DOC";
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<N1::A_ndc>[] = {
-   c2py::getsetdef_from_member<&N1::A_ndc::u, N1::A_ndc>("u", doc_member_0),
+constinit PyGetSetDef c2py::tp_getset<N1::A_ndc>[] = {c2py::getsetdef_from_member<&N1::A_ndc::u, N1::A_ndc>("u", doc_member_0),
 
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+                                                      {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 template <> inline const std::string c2py::cpp_name<N1::params>   = "N1::params";
 template <> inline constexpr auto c2py::tp_name<N1::params>       = "synth_init.Params";
@@ -52,8 +51,7 @@ static int synth_constructor_0(PyObject *self, PyObject *, PyObject *kwargs) {
   try {
     ((c2py::py_type<N1::params> *)self)->_c = new N1::params{};
   } catch (std::exception const &e) {
-    PyErr_SetString(PyExc_RuntimeError,
-                    ("Error in constructing N1::params from a Python dict.\n   "s + e.what()).c_str());
+    PyErr_SetString(PyExc_RuntimeError, ("Error in constructing N1::params from a Python dict.\n   "s + e.what()).c_str());
     return -1;
   }
   auto &self_c = *(((c2py::py_type<N1::params> *)self)->_c);
@@ -90,13 +88,12 @@ static PyObject *prop_get_dict_0(PyObject *self, void *) {
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<N1::params>[] = {
-   c2py::getsetdef_from_member<&N1::params::i, N1::params>("i", doc_member_1),
-   c2py::getsetdef_from_member<&N1::params::x, N1::params>("x", doc_member_2),
-   c2py::getsetdef_from_member<&N1::params::v, N1::params>("v", doc_member_3),
-   c2py::getsetdef_from_member<&N1::params::w, N1::params>("w", doc_member_4),
-   {"__dict__", (getter)prop_get_dict_0, nullptr, "", nullptr},
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+constinit PyGetSetDef c2py::tp_getset<N1::params>[] = {c2py::getsetdef_from_member<&N1::params::i, N1::params>("i", doc_member_1),
+                                                       c2py::getsetdef_from_member<&N1::params::x, N1::params>("x", doc_member_2),
+                                                       c2py::getsetdef_from_member<&N1::params::v, N1::params>("v", doc_member_3),
+                                                       c2py::getsetdef_from_member<&N1::params::w, N1::params>("w", doc_member_4),
+                                                       {"__dict__", (getter)prop_get_dict_0, nullptr, "", nullptr},
+                                                       {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 template <> inline const std::string c2py::cpp_name<N1::params_ndc>   = "N1::params_ndc";
 template <> inline constexpr auto c2py::tp_name<N1::params_ndc>       = "synth_init.ParamsNdc";
@@ -107,8 +104,7 @@ static int synth_constructor_1(PyObject *self, PyObject *, PyObject *kwargs) {
   try {
     ((c2py::py_type<N1::params_ndc> *)self)->_c = new N1::params_ndc{.ndc1 = de.get<N1::A_ndc>("ndc1")};
   } catch (std::exception const &e) {
-    PyErr_SetString(PyExc_RuntimeError,
-                    ("Error in constructing N1::params_ndc from a Python dict.\n   "s + e.what()).c_str());
+    PyErr_SetString(PyExc_RuntimeError, ("Error in constructing N1::params_ndc from a Python dict.\n   "s + e.what()).c_str());
     return -1;
   }
   auto &self_c = *(((c2py::py_type<N1::params_ndc> *)self)->_c);
@@ -150,15 +146,14 @@ static PyObject *prop_get_dict_1(PyObject *self, void *) {
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<N1::params_ndc>[] = {
-   c2py::getsetdef_from_member<&N1::params_ndc::i, N1::params_ndc>("i", doc_member_5),
-   c2py::getsetdef_from_member<&N1::params_ndc::x, N1::params_ndc>("x", doc_member_6),
-   c2py::getsetdef_from_member<&N1::params_ndc::ndc1, N1::params_ndc>("ndc1", doc_member_7),
-   c2py::getsetdef_from_member<&N1::params_ndc::ndc2, N1::params_ndc>("ndc2", doc_member_8),
-   c2py::getsetdef_from_member<&N1::params_ndc::v, N1::params_ndc>("v", doc_member_9),
-   c2py::getsetdef_from_member<&N1::params_ndc::w, N1::params_ndc>("w", doc_member_10),
-   {"__dict__", (getter)prop_get_dict_1, nullptr, "", nullptr},
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+constinit PyGetSetDef c2py::tp_getset<N1::params_ndc>[] = {c2py::getsetdef_from_member<&N1::params_ndc::i, N1::params_ndc>("i", doc_member_5),
+                                                           c2py::getsetdef_from_member<&N1::params_ndc::x, N1::params_ndc>("x", doc_member_6),
+                                                           c2py::getsetdef_from_member<&N1::params_ndc::ndc1, N1::params_ndc>("ndc1", doc_member_7),
+                                                           c2py::getsetdef_from_member<&N1::params_ndc::ndc2, N1::params_ndc>("ndc2", doc_member_8),
+                                                           c2py::getsetdef_from_member<&N1::params_ndc::v, N1::params_ndc>("v", doc_member_9),
+                                                           c2py::getsetdef_from_member<&N1::params_ndc::w, N1::params_ndc>("w", doc_member_10),
+                                                           {"__dict__", (getter)prop_get_dict_1, nullptr, "", nullptr},
+                                                           {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 // ==================== module functions ====================
 
@@ -172,16 +167,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "synth_init", /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "synth_init", /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 

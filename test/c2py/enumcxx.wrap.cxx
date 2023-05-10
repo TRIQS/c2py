@@ -40,16 +40,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "enumcxx",    /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "enumcxx",    /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 

@@ -24,8 +24,8 @@ template <> inline constexpr const char *c2py::tp_doc<dummy_class> = R"DOC(   )D
 static auto init_0                                        = c2py::dispatcher_c_kw_t{c2py::c_constructor<dummy_class>()};
 template <> constexpr initproc c2py::tp_init<dummy_class> = c2py::pyfkw_constructor<init_0>;
 // do_thing
-static auto const fun_0 = c2py::dispatcher_f_kw_t{
-   c2py::cfun(c2py::castm<const std::function<double(const dummy_class::myarray<1> &)> &>(&dummy_class::do_thing), "")};
+static auto const fun_0 =
+   c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castm<const std::function<double(const dummy_class::myarray<1> &)> &>(&dummy_class::do_thing), "")};
 static const auto doc_d_0 = fun_0.doc({R"DOC(   )DOC"});
 
 // ----- Method table ----
@@ -69,16 +69,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "issue9",     /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "issue9",     /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 

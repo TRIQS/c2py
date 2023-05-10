@@ -18,23 +18,19 @@ using c2py::operator"" _a;
 // ==================== module functions ====================
 
 // call1
-static auto const fun_0 =
-   c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<const std::function<int(int, int)> &>(&call1), "f")};
+static auto const fun_0 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<const std::function<int(int, int)> &>(&call1), "f")};
 
 // call2
 static auto const fun_1 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<std::function<int(int, int)>>(&call2), "f")};
 
 // call3
-static auto const fun_2 =
-   c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<const std::function<int(std::pair<int, int>)> &>(&call3), "f")};
+static auto const fun_2 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<const std::function<int(std::pair<int, int>)> &>(&call3), "f")};
 
 // call4
-static auto const fun_3 =
-   c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<std::function<int(std::pair<int, int>)>>(&call4), "f")};
+static auto const fun_3 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<std::function<int(std::pair<int, int>)>>(&call4), "f")};
 
 // call5
-static auto const fun_4 =
-   c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<std::function<int(const std::pair<int, int> &)>>(&call5), "f")};
+static auto const fun_4 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<std::function<int(const std::pair<int, int> &)>>(&call5), "f")};
 
 // callback
 static auto const fun_5 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<>(&callback))};
@@ -71,16 +67,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "callables",  /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "callables",  /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 

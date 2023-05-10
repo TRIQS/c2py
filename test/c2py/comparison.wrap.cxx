@@ -38,16 +38,15 @@ constexpr auto doc_member_0 = R"DOC()DOC";
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<N::cls_comp>[] = {
-   c2py::getsetdef_from_member<&N::cls_comp::value, N::cls_comp>("value", doc_member_0),
+constinit PyGetSetDef c2py::tp_getset<N::cls_comp>[] = {c2py::getsetdef_from_member<&N::cls_comp::value, N::cls_comp>("value", doc_member_0),
 
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+                                                        {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 template <> inline const std::string c2py::cpp_name<N::cls_equal>   = "N::cls_equal";
 template <> inline constexpr auto c2py::tp_name<N::cls_equal>       = "comparison.ClsEqual";
 template <> inline constexpr const char *c2py::tp_doc<N::cls_equal> = R"DOC(   )DOC";
 
-static auto init_1 = c2py::dispatcher_c_kw_t{c2py::c_constructor<N::cls_equal>()};
+static auto init_1                                         = c2py::dispatcher_c_kw_t{c2py::c_constructor<N::cls_equal>()};
 template <> constexpr initproc c2py::tp_init<N::cls_equal> = c2py::pyfkw_constructor<init_1>;
 
 // ----- Method table ----
@@ -62,16 +61,15 @@ constexpr auto doc_member_1 = R"DOC()DOC";
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<N::cls_equal>[] = {
-   c2py::getsetdef_from_member<&N::cls_equal::value, N::cls_equal>("value", doc_member_1),
+constinit PyGetSetDef c2py::tp_getset<N::cls_equal>[] = {c2py::getsetdef_from_member<&N::cls_equal::value, N::cls_equal>("value", doc_member_1),
 
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+                                                         {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 template <> inline const std::string c2py::cpp_name<N::cls_equal2>   = "N::cls_equal2";
 template <> inline constexpr auto c2py::tp_name<N::cls_equal2>       = "comparison.ClsEqual2";
 template <> inline constexpr const char *c2py::tp_doc<N::cls_equal2> = R"DOC(   )DOC";
 
-static auto init_2 = c2py::dispatcher_c_kw_t{c2py::c_constructor<N::cls_equal2>()};
+static auto init_2                                          = c2py::dispatcher_c_kw_t{c2py::c_constructor<N::cls_equal2>()};
 template <> constexpr initproc c2py::tp_init<N::cls_equal2> = c2py::pyfkw_constructor<init_2>;
 
 // ----- Method table ----
@@ -86,32 +84,26 @@ constexpr auto doc_member_2 = R"DOC()DOC";
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<N::cls_equal2>[] = {
-   c2py::getsetdef_from_member<&N::cls_equal2::value, N::cls_equal2>("value", doc_member_2),
+constinit PyGetSetDef c2py::tp_getset<N::cls_equal2>[] = {c2py::getsetdef_from_member<&N::cls_equal2::value, N::cls_equal2>("value", doc_member_2),
 
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+                                                          {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 // ==================== module functions ====================
 
 // operator<
-static auto const fun_0 =
-   c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator<(x, y); }, "x", "y")};
+static auto const fun_0 = c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator<(x, y); }, "x", "y")};
 
 // operator<=
-static auto const fun_1 =
-   c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator<=(x, y); }, "x", "y")};
+static auto const fun_1 = c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator<=(x, y); }, "x", "y")};
 
 // operator==
-static auto const fun_2 = c2py::dispatcher_f_kw_t{
-   c2py::cfun([](N::cls_equal x, const N::cls_equal &y) { return operator==(x, y); }, "x", "y")};
+static auto const fun_2 = c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_equal x, const N::cls_equal &y) { return operator==(x, y); }, "x", "y")};
 
 // operator>
-static auto const fun_3 =
-   c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator>(x, y); }, "x", "y")};
+static auto const fun_3 = c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator>(x, y); }, "x", "y")};
 
 // operator>=
-static auto const fun_4 =
-   c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator>=(x, y); }, "x", "y")};
+static auto const fun_4 = c2py::dispatcher_f_kw_t{c2py::cfun([](N::cls_comp x, const N::cls_comp &y) { return operator>=(x, y); }, "x", "y")};
 
 static const auto doc_d_0 = fun_0.doc({R"DOC(   )DOC"});
 static const auto doc_d_1 = fun_1.doc({R"DOC(   )DOC"});
@@ -133,16 +125,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "comparison", /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "comparison", /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 

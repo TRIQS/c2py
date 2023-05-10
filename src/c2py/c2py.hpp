@@ -2,6 +2,14 @@
 #include <Python.h>
 #include <type_traits>
 
+// The macro C2PY_INCLUDED is defined either here, when including the c2py
+// or as a compiler option in the clair clang_plugin target to make
+// sure it is always defined before the user's code, in case the user has not included c2py FIRST.
+// TRIQS libraries will then automatically include their converters/hxx
+#ifndef C2PY_INCLUDED
+#define C2PY_INCLUDED
+#endif
+
 #include "module.hpp"
 
 #include "macros.hpp"
@@ -32,6 +40,3 @@
 
 #include "py_range.hpp"
 #include "synth_constructor.hpp"
-
-// FIXME include explicitly ??
-#include "h5.hpp"

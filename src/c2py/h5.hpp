@@ -1,8 +1,12 @@
-#ifdef H5_INTERFACE_INCLUDED
-
+#pragma once
 #include <h5/serialization.hpp>
+#include "./py_converter.hpp"
+#include "dispatcher.hpp"
 
 namespace c2py {
+
+  template <> constexpr bool is_wrapped<h5::group> = true;
+  template <> constexpr bool is_wrapped<h5::file>  = true;
 
   /// hdf5 is not defined for this object, we still but a function + exception for a clear and early error message.
   template <typename Cls> static PyObject *tpxx_write_h5(PyObject *self, PyObject *args) {
@@ -23,7 +27,7 @@ namespace c2py {
         else
           return cxx2py(T{h5::h5_read<T>(gr, name)});
       } catch (std::exception const &e) {
-        auto err = std::string(".. In h5 reading of object of type ") + cpp_name<T> + "\n.... " + e.what() + "\n"; 
+        auto err = std::string(".. In h5 reading of object of type ") + cpp_name<T> + "\n.... " + e.what() + "\n";
         throw std::runtime_error{err};
       }
     };
@@ -65,5 +69,3 @@ namespace c2py {
   };
 
 } // namespace c2py
-
-#endif

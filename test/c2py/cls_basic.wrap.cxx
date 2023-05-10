@@ -25,11 +25,11 @@ inline constexpr const char *c2py::tp_doc<A> = R"DOC(   Brief description of A
    
    A long description of A. with multiple lines)DOC";
 
-static auto init_0 = c2py::dispatcher_c_kw_t{c2py::c_constructor<A>(), c2py::c_constructor<A, int>("i")};
+static auto init_0                              = c2py::dispatcher_c_kw_t{c2py::c_constructor<A>(), c2py::c_constructor<A, int>("i")};
 template <> constexpr initproc c2py::tp_init<A> = c2py::pyfkw_constructor<init_0>;
 // __call__
-static auto const fun_0 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castm<int>(&A::operator()), "i"),
-                                                  c2py::cfun(c2py::castmc<int, int>(&A::operator()), "i", "j")};
+static auto const fun_0 =
+   c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castm<int>(&A::operator()), "i"), c2py::cfun(c2py::castmc<int, int>(&A::operator()), "i", "j")};
 
 template <> inline constexpr ternaryfunc c2py::tp_call<A> = c2py::pyfkw<fun_0>;
 
@@ -72,12 +72,11 @@ static constexpr auto prop_doc_0 = R"DOC()DOC";
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<A>[] = {
-   c2py::getsetdef_from_member<&A::k, A>("k", doc_member_0),
-   {"k_immutable", c2py::get_member<&A::k_immutable, A>, nullptr, doc_member_1, nullptr},
-   c2py::getsetdef_from_member<&A::v, A>("v", doc_member_2),
-   {"prop1", c2py::getter_from_method<&A::prop1>, nullptr, prop_doc_0, nullptr},
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+constinit PyGetSetDef c2py::tp_getset<A>[] = {c2py::getsetdef_from_member<&A::k, A>("k", doc_member_0),
+                                              {"k_immutable", c2py::get_member<&A::k_immutable, A>, nullptr, doc_member_1, nullptr},
+                                              c2py::getsetdef_from_member<&A::v, A>("v", doc_member_2),
+                                              {"prop1", c2py::getter_from_method<&A::prop1>, nullptr, prop_doc_0, nullptr},
+                                              {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 static PyObject *getitem_0(PyObject *self, PyObject *key) {
   static c2py::dispatcher_t<c2py::pycfun23> disp = {c2py::cfun2(c2py::getitem<A, int>)};
@@ -143,16 +142,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "cls_basic",  /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "cls_basic",  /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 

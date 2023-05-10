@@ -21,7 +21,7 @@ template <> inline const std::string c2py::cpp_name<A<int>>   = "A<int>";
 template <> inline constexpr auto c2py::tp_name<A<int>>       = "tpl_cls.AA";
 template <> inline constexpr const char *c2py::tp_doc<A<int>> = R"DOC(   )DOC";
 
-static auto init_0 = c2py::dispatcher_c_kw_t{c2py::c_constructor<A<int>>(), c2py::c_constructor<A<int>, int>("i")};
+static auto init_0                                   = c2py::dispatcher_c_kw_t{c2py::c_constructor<A<int>>(), c2py::c_constructor<A<int>, int>("i")};
 template <> constexpr initproc c2py::tp_init<A<int>> = c2py::pyfkw_constructor<init_0>;
 // f
 static auto const fun_0 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castmc<int>(&A<int>::f), "x")};
@@ -51,12 +51,11 @@ constexpr auto doc_member_2 = R"DOC()DOC";
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<A<int>>[] = {
-   c2py::getsetdef_from_member<&A<int>::k, A<int>>("k", doc_member_0),
-   {"k_immutable", c2py::get_member<&A<int>::k_immutable, A<int>>, nullptr, doc_member_1, nullptr},
-   c2py::getsetdef_from_member<&A<int>::v, A<int>>("v", doc_member_2),
+constinit PyGetSetDef c2py::tp_getset<A<int>>[] = {c2py::getsetdef_from_member<&A<int>::k, A<int>>("k", doc_member_0),
+                                                   {"k_immutable", c2py::get_member<&A<int>::k_immutable, A<int>>, nullptr, doc_member_1, nullptr},
+                                                   c2py::getsetdef_from_member<&A<int>::v, A<int>>("v", doc_member_2),
 
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+                                                   {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 // ==================== module functions ====================
 
@@ -70,16 +69,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "tpl_cls",    /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "tpl_cls",    /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 

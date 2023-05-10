@@ -39,10 +39,9 @@ constexpr auto doc_member_0 = R"DOC()DOC";
 // ----- Method table ----
 
 template <>
-constinit PyGetSetDef c2py::tp_getset<a_class>[] = {
-   c2py::getsetdef_from_member<&a_class::v, a_class>("v", doc_member_0),
+constinit PyGetSetDef c2py::tp_getset<a_class>[] = {c2py::getsetdef_from_member<&a_class::v, a_class>("v", doc_member_0),
 
-   {nullptr, nullptr, nullptr, nullptr, nullptr}};
+                                                    {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
 // ==================== module functions ====================
 
@@ -61,16 +60,15 @@ static PyMethodDef module_methods[] = {
 
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
-static struct PyModuleDef module_def = {
-   PyModuleDef_HEAD_INIT,
-   "itertool",   /* name of module */
-   "DOC MODULE", /* module documentation, may be NULL */
-   -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
-   module_methods,
-   NULL,
-   NULL,
-   NULL,
-   NULL};
+static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
+                                        "itertool",   /* name of module */
+                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+                                        module_methods,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL};
 
 //--------------------- module init function -----------------------------
 
