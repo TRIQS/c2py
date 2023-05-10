@@ -89,8 +89,8 @@ double dummy_class::do_thing(double x) { return 3 * x; }
 
 namespace c2py_module {
 
-  constexpr auto cls_reject = "hidden";
-  constexpr auto fun_reject = "fff";
+  constexpr auto regex_exclude = "hidden";
+  constexpr auto regex_exclude_fun = "fff";
 
   constexpr auto get_set_as_properties = true;
   auto module_init                     = []() { std::cout << "Starting module" << std::endl; };

@@ -38,12 +38,9 @@ namespace N {
 
 namespace c2py_module {
 
-  auto cls_reject = "N::my_private_base";
+  auto regex_exclude_cls = "N::my_private_base";
 
-  template <> struct wrap_info<N::my_class> {
-
-    // List of bases class to merge
-    using bases_to_merge = std::tuple<N::my_base, N::my_base_templated<double>>;
-  };
+  // fails with error if I attempt to wrap C3 as well
+  //using C3 = N::my_base_templated<double>;
 
 } // namespace c2py_module
