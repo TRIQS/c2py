@@ -72,24 +72,6 @@ namespace c2py_module {
   // Clang find classes according to the Rules above and implicitly add
   //using C = C
 
-  // Contains some optional information on the wrapping of 
-  // e.g. A . Also works for template with partial spe.
-  template <> struct wrap_info<A> {
-
-    // Base class [Optional] NOT IMPLEMENTED.
-    using base = B;
-
-    // List of bases class to merge [optional]
-    using bases_to_merge = std::tuple<...>;
-
-    // Regex to select some methods. NOT IMPLEMENTED.
-    static constexpr auto meth_regex = "";
-
-    // For simple struct (no constructor), synthetize a construction from a pydict
-    auto synthetize_constructor = true; //
-
-  };
-
   /// Declaration of arithmetic operations
   template <> auto arithmetic<A> = c2py::arithmetic<Op<"+", A, A, R>, ...>; // variable template
 

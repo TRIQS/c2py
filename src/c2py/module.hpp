@@ -8,7 +8,6 @@
 #define C2PY_METHODS_AS_PROPERTY __attribute__((annotate("c2py_methods_as_property")))
 
 namespace c2py_module {
-  template <typename T> struct wrap_info {};
   template <typename T> struct add_methods_to {};
 } // namespace c2py_module
 
@@ -35,7 +34,6 @@ namespace c2py {
     // FIXME RENAME
     template <typename T>
     concept fake_force_instantiation = requires {
-      { c2py_module::wrap_info<T>{} };
       { c2py_module::add_methods_to<T>{} };
     };
 

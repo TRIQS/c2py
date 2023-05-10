@@ -95,9 +95,6 @@ namespace c2py_module {
   constexpr auto get_set_as_properties = true;
   auto module_init                     = []() { std::cout << "Starting module" << std::endl; };
 
-  //template<> struct wrap_info<A> {
-  //};
-
   template <> struct add_methods_to<A> {
     static constexpr auto h = c2py::dispatch<hhh>;
   };
