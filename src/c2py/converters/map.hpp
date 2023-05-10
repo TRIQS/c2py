@@ -28,7 +28,10 @@ namespace c2py {
 
   template <typename K, typename V> struct py_converter<std::map<K, V>> {
 
-    template <typename M> static PyObject *c2py(M &&m) {
+    template <typename M>
+    static PyObject *c2py(M &&m)
+      requires(concepts::IsConvertibleC2Py<V>)
+    {
       static_assert(is_instantiation_of_v<std::map, std::decay_t<M>>, "Logic Error");
 
       PyObject *d = PyDict_New();
@@ -74,7 +77,9 @@ namespace c2py {
 
     // ----------------------------------------------
 
-    static std::map<K, V> py2c(PyObject *ob) {
+    static std::map<K, V> py2c(PyObject *ob)
+      requires(concepts::IsConvertiblePy2C<V>)
+    {
       pyref keys   = PyDict_Keys(ob);
       pyref values = PyDict_Values(ob);
       std::map<K, V> res;

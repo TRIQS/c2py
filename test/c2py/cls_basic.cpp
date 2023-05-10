@@ -78,6 +78,8 @@ A maker_A(int i) {
 struct hidden {};
 void fff(hidden h) {}
 
+static_assert(not c2py::concepts::IsConvertibleC2Py<std::map<std::string, hidden>>);
+
 /// test implementation outside of class
 
 struct dummy_class {
@@ -89,7 +91,7 @@ double dummy_class::do_thing(double x) { return 3 * x; }
 
 namespace c2py_module {
 
-  constexpr auto regex_exclude = "hidden";
+  constexpr auto regex_exclude     = "hidden";
   constexpr auto regex_exclude_fun = "fff";
 
   constexpr auto get_set_as_properties = true;

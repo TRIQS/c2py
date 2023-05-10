@@ -19,6 +19,7 @@
 #pragma once
 #include "./pyref.hpp"
 #include "./converter_table.hpp"
+#include <type_traits>
 
 // for backward compatibility layer below
 namespace cpp2py {
@@ -77,7 +78,7 @@ namespace c2py {
 
     template <typename U>
     concept IsConvertibleC2Py = requires(U x) {
-      { c2py::py_converter<U>::c2py(x) } -> std::same_as<PyObject *>;
+      { c2py::py_converter<std::remove_const_t<U>>::c2py(x) } -> std::same_as<PyObject *>;
     };
 
     template <typename U>
