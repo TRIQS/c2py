@@ -1,7 +1,6 @@
 #include "pycfun_kw.hpp"
 #include "util.hpp"
 #include <string>
-//NOLINTNEXTLINE
 //#include "./c2py.hpp"
 //#include "./signal_handler.hpp"
 

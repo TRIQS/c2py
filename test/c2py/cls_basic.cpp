@@ -98,7 +98,8 @@ namespace c2py_module {
   auto module_init                     = []() { std::cout << "Starting module" << std::endl; };
 
   template <> struct add_methods_to<A> {
-    static constexpr auto h = c2py::dispatch<hhh>;
+    static constexpr auto h     = c2py::dispatch<hhh>;
+    static constexpr auto clone = c2py::dispatch<c2py::clone<A>>;
   };
 
 } // namespace c2py_module

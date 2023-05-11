@@ -22,11 +22,8 @@ namespace c2py {
 
   template <typename... A> static constexpr auto castmc = []<typename R, typename C>(R (C::*f)(A...) const) { return f; };
 
-  // For each type with an explicit converter
-  // specialize, and give the name of the includer to be used.
-  // template <typename T> static constexpr char *has_converter = nullptr;
-
-  // FIXME : namespace module is not GREAT .... c2py_module ??
+  /// To make a clone function
+  template <typename T> static T clone(T const &x) { return T{x}; };
   namespace concepts {
 
     //---------------- Serialize-------------------

@@ -28,7 +28,7 @@ namespace c2py {
   template <> inline const std::string cpp_name<A> = "[C++ A]";
 
   template <> constexpr auto tp_name<A>       = "cls.A";
-  template <> constexpr const char *tp_doc<A> = "Doc A";
+  template <> constexpr const char *tp_doc<A> = "Doc A ";
 } // namespace c2py
 //      --- constructor ---
 static int init_1(PyObject *self, PyObject *args, PyObject *kwargs) {

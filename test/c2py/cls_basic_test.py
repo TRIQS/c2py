@@ -12,6 +12,11 @@ class TestIterable(unittest.TestCase):
         self.assertEqual( a.k,  3)
         np.testing.assert_array_equal( a.v,  [1,2,3,5])
 
+   def test_clone(self):
+        a = M.A(3)
+        b = a.clone()
+        self.assertEqual(a,b)          
+
    def test_member(self):
         a = M.A()
         self.assertEqual( a.k,  12)
