@@ -91,6 +91,12 @@ double dummy_class::do_thing(double x) { return 3 * x; }
 
 namespace c2py_module {
 
+  const auto documentation = R"RAW(
+  A long documentation of this nice module
+  with multiple lines
+  etc...
+  )RAW";
+
   constexpr auto regex_exclude     = "hidden";
   constexpr auto regex_exclude_fun = "fff";
 
