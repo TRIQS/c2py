@@ -21,9 +21,10 @@ namespace c2py {
       // The call has failed. We rerun, but raising the exception in each case, and report
       std::stringstream err;
       err << "[c2py] Can not call the function with the arguments\n";
-      if (self) err << "  - " << PyUnicode_AsUTF8(pyref{PyObject_Str(self)}) << "\n";
+      //if (self) err << "  - " << PyUnicode_AsUTF8(pyref{PyObject_Str(self)}) << "\n";
       if (args) err << "  - " << PyUnicode_AsUTF8(pyref{PyObject_Str(args)}) << "\n";
       if (kwargs) err << "  - " << PyUnicode_AsUTF8(pyref{PyObject_Str(kwargs)}) << "\n";
+      err << "The dispatch to C++ failed with the following error(s):\n";
       int c = 0;
       for (auto const &ov : ov_list) {
         ++c;
@@ -31,7 +32,7 @@ namespace c2py {
 
         PyObject *error_msg = nullptr, *ptype = nullptr, *ptraceback = nullptr;
         PyErr_Fetch(&ptype, &error_msg, &ptraceback);
-        if (error_msg and PyUnicode_Check(error_msg)) err << "[" << c << "] " << ov->signature() << "\n   " << PyUnicode_AsUTF8(error_msg) << "\n";
+        if (error_msg and PyUnicode_Check(error_msg)) err << "[" << c << "] " << ov->signature() << "\n    " << PyUnicode_AsUTF8(error_msg) << "\n";
         Py_XDECREF(ptype);
         Py_XDECREF(ptraceback);
         Py_XDECREF(error_msg);

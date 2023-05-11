@@ -1,6 +1,7 @@
 #pragma once
 #include <sstream>
 #include <functional>
+#include <algorithm>
 #include <map>
 namespace c2py {
 
@@ -10,6 +11,21 @@ namespace c2py {
     std::map<V, K> res;
     for (auto const &[k, v] : m) res.insert({v, k});
     return res;
+  }
+
+  // ------- trim a string: trim (both sides), rtrim (right only), ltrim
+
+  inline std::string replacenl(std::string s) {
+    std::replace(s.begin(), s.end(), '\n', ' ');
+    return s;
+  }
+
+  const std::string whitespace_and_star = " \n\r\t\f\v";
+
+  inline std::string trim(const std::string &s, std::string const &delim = whitespace_and_star) {
+    size_t start = s.find_first_not_of(delim);
+    size_t end   = s.find_last_not_of(delim);
+    return (end == std::string::npos) ? "" : s.substr(start, end + 1 - start);
   }
 
   // -------  string join ---------

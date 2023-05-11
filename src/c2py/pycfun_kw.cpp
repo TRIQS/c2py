@@ -1,4 +1,6 @@
 #include "pycfun_kw.hpp"
+#include "util.hpp"
+#include <string>
 //NOLINTNEXTLINE
 //#include "./c2py.hpp"
 //#include "./signal_handler.hpp"
@@ -37,7 +39,13 @@ bool c2py::pycfun_kw::is_callable(PyObject *, PyObject *args, PyObject *kwargs, 
 
   // check all positional arguments for convertion
   for (int pos = 0; pos < n_args_py; pos++) {
-    if (not c_arguments[pos].is_convertible(PyTuple_GetItem(args, pos), raise_exception)) return false;
+    if (not c_arguments[pos].is_convertible(PyTuple_GetItem(args, pos), raise_exception)) {
+      if (raise_exception) {
+        auto err = get_python_error();
+        PyErr_SetString(PyExc_TypeError, (c_arguments[pos].name + ": " + err).c_str());
+      }
+      return false;
+    }
   }
 
   // check the remaining arguments.
@@ -80,7 +88,7 @@ bool c2py::pycfun_kw::is_callable(PyObject *, PyObject *args, PyObject *kwargs, 
 std::string c2py::pycfun_kw::signature() const {
   auto res = "("
      + join(
-                c_arguments, [](auto &&a) { return a.name + ":" + (*a.type_name); }, ", ");
+                c_arguments, [](auto &&a) { return a.name + ": " + trim(*a.type_name); }, ", ");
   return (this->rtype_name ? res + ") -> " + (*this->rtype_name) : res);
 }
 

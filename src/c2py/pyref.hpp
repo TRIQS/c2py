@@ -142,7 +142,7 @@ namespace c2py {
       }
       if ((i == 0) && (raise_exception)) {
         pyref cls_name_obj = PyObject_GetAttrString(cls, "__name__");
-        std::string err    = "Type error: Python object does not match expected type ";
+        std::string err    = "Type error. Expected ";
         err.append(PyUnicode_AsUTF8(cls_name_obj));
         PyErr_SetString(PyExc_TypeError, err.c_str());
       }
@@ -162,6 +162,17 @@ namespace c2py {
   inline std::string to_string(PyObject *ob) {
     pyref py_str = PyObject_Str(ob);
     return PyUnicode_AsUTF8(py_str);
+  }
+
+  inline std::string get_python_error() {
+    std::string r;
+    PyObject *error_msg = nullptr, *ptype = nullptr, *ptraceback = nullptr;
+    PyErr_Fetch(&ptype, &error_msg, &ptraceback);
+    if (error_msg and PyUnicode_Check(error_msg)) r = PyUnicode_AsUTF8(error_msg);
+    Py_XDECREF(ptype);
+    Py_XDECREF(ptraceback);
+    Py_XDECREF(error_msg);
+    return r;
   }
 
 } // namespace c2py
