@@ -4,8 +4,10 @@
 #ifdef __clang__
 #pragma clang diagnostic ignored "-W#warnings"
 #endif
-#include "synth_init.cpp"
+#define C2PY_VERSION_MAJOR 0
+#define C2PY_VERSION_MINOR 1
 #include "c2py/c2py.hpp"
+#include "synth_init.cpp"
 
 using c2py::operator"" _a;
 
@@ -42,9 +44,19 @@ constinit PyGetSetDef c2py::tp_getset<N1::A_ndc>[] = {c2py::getsetdef_from_membe
 
                                                       {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
-template <> inline const std::string c2py::cpp_name<N1::params>   = "N1::params";
-template <> inline constexpr auto c2py::tp_name<N1::params>       = "synth_init.Params";
-template <> inline constexpr const char *c2py::tp_doc<N1::params> = R"DOC(   )DOC";
+template <> inline const std::string c2py::cpp_name<N1::params> = "N1::params";
+template <> inline constexpr auto c2py::tp_name<N1::params>     = "synth_init.Params";
+template <>
+inline constexpr const char *c2py::tp_doc<N1::params> = R"DOC(   * i: int
+      An int
+   
+   * v: std::vector<int>
+      A vector of int
+   
+   * x: double = 10
+      A double
+   
+   * w: std::vector<int> = {1, 2, 3})DOC";
 
 static int synth_constructor_0(PyObject *self, PyObject *, PyObject *kwargs) {
   c2py::pydict_extractor de{kwargs};
@@ -95,9 +107,26 @@ constinit PyGetSetDef c2py::tp_getset<N1::params>[] = {c2py::getsetdef_from_memb
                                                        {"__dict__", (getter)prop_get_dict_0, nullptr, "", nullptr},
                                                        {nullptr, nullptr, nullptr, nullptr, nullptr}};
 
-template <> inline const std::string c2py::cpp_name<N1::params_ndc>   = "N1::params_ndc";
-template <> inline constexpr auto c2py::tp_name<N1::params_ndc>       = "synth_init.ParamsNdc";
-template <> inline constexpr const char *c2py::tp_doc<N1::params_ndc> = R"DOC(   )DOC";
+template <> inline const std::string c2py::cpp_name<N1::params_ndc> = "N1::params_ndc";
+template <> inline constexpr auto c2py::tp_name<N1::params_ndc>     = "synth_init.ParamsNdc";
+template <>
+inline constexpr const char *c2py::tp_doc<N1::params_ndc> = R"DOC(   * i: int
+      An int
+   
+   * ndc1: N1::A_ndc
+      A non default constructible object
+   
+   * v: std::vector<int>
+      A vector of int
+   
+   * x: double = 10
+      A double
+      with a long doc
+   
+   * ndc2: N1::A_ndc = A_ndc{9}
+      A non default constructible object with a default init
+   
+   * w: std::vector<int> = {1, 2, 3})DOC";
 
 static int synth_constructor_1(PyObject *self, PyObject *, PyObject *kwargs) {
   c2py::pydict_extractor de{kwargs};
@@ -126,7 +155,8 @@ PyMethodDef c2py::tp_methods<N1::params_ndc>[] = {
 };
 
 constexpr auto doc_member_5  = R"DOC(/// An int)DOC";
-constexpr auto doc_member_6  = R"DOC(/// A double)DOC";
+constexpr auto doc_member_6  = R"DOC(/// A double
+    /// with a long doc)DOC";
 constexpr auto doc_member_7  = R"DOC(/// A non default constructible object)DOC";
 constexpr auto doc_member_8  = R"DOC(/// A non default constructible object with a default init)DOC";
 constexpr auto doc_member_9  = R"DOC(/// A vector of int)DOC";
@@ -168,8 +198,8 @@ static PyMethodDef module_methods[] = {
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
 static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
-                                        "synth_init", /* name of module */
-                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        "synth_init",      /* name of module */
+                                        R"RAWDOC()RAWDOC", /* module documentation, may be NULL */
                                         -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
                                         module_methods,
                                         NULL,

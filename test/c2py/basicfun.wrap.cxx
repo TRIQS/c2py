@@ -4,8 +4,10 @@
 #ifdef __clang__
 #pragma clang diagnostic ignored "-W#warnings"
 #endif
-#include "basicfun.cpp"
+#define C2PY_VERSION_MAJOR 0
+#define C2PY_VERSION_MINOR 1
 #include "c2py/c2py.hpp"
+#include "basicfun.cpp"
 
 using c2py::operator"" _a;
 
@@ -32,8 +34,11 @@ static auto const fun_3 = c2py::dispatcher_f_kw_t{c2py::cfun(&N::h<int>, "x"), c
 // hf
 static auto const fun_4 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<int>(&f1), "x"), c2py::cfun(&N::h<double>, "x")};
 
+// isfinite
+static auto const fun_5 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<const N::dcomplex &>(&N::isfinite), "x")};
+
 // ret_with_alias
-static auto const fun_5 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<>(&ret_with_alias))};
+static auto const fun_6 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<>(&ret_with_alias))};
 
 static constexpr auto doc_f_0_0 = R"DOC(   A doc for f(x)
    
@@ -60,6 +65,7 @@ static constexpr auto doc_f_4_0 = R"DOC(   )DOC";
 static constexpr auto doc_f_4_1 = R"DOC(   )DOC";
 static const auto doc_d_4       = fun_4.doc({doc_f_4_0, doc_f_4_1});
 static const auto doc_d_5       = fun_5.doc({R"DOC(   )DOC"});
+static const auto doc_d_6       = fun_6.doc({R"DOC(   )DOC"});
 //--------------------- module function table  -----------------------------
 
 static PyMethodDef module_methods[] = {
@@ -68,7 +74,8 @@ static PyMethodDef module_methods[] = {
    {"g", (PyCFunction)c2py::pyfkw<fun_2>, METH_VARARGS | METH_KEYWORDS, doc_d_2.c_str()},
    {"h", (PyCFunction)c2py::pyfkw<fun_3>, METH_VARARGS | METH_KEYWORDS, doc_d_3.c_str()},
    {"hf", (PyCFunction)c2py::pyfkw<fun_4>, METH_VARARGS | METH_KEYWORDS, doc_d_4.c_str()},
-   {"ret_with_alias", (PyCFunction)c2py::pyfkw<fun_5>, METH_VARARGS | METH_KEYWORDS, doc_d_5.c_str()},
+   {"isfinite", (PyCFunction)c2py::pyfkw<fun_5>, METH_VARARGS | METH_KEYWORDS, doc_d_5.c_str()},
+   {"ret_with_alias", (PyCFunction)c2py::pyfkw<fun_6>, METH_VARARGS | METH_KEYWORDS, doc_d_6.c_str()},
    {nullptr, nullptr, 0, nullptr} // Sentinel
 };
 
@@ -77,8 +84,8 @@ static PyMethodDef module_methods[] = {
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
 static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
-                                        "basicfun",   /* name of module */
-                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        "basicfun",                            /* name of module */
+                                        R"RAWDOC(Module documentation)RAWDOC", /* module documentation, may be NULL */
                                         -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
                                         module_methods,
                                         NULL,

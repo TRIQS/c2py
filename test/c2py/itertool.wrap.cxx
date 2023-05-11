@@ -4,8 +4,10 @@
 #ifdef __clang__
 #pragma clang diagnostic ignored "-W#warnings"
 #endif
-#include "itertool.cpp"
+#define C2PY_VERSION_MAJOR 0
+#define C2PY_VERSION_MINOR 1
 #include "c2py/c2py.hpp"
+#include "itertool.cpp"
 
 using c2py::operator"" _a;
 
@@ -61,8 +63,8 @@ static PyMethodDef module_methods[] = {
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
 static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
-                                        "itertool",   /* name of module */
-                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        "itertool",        /* name of module */
+                                        R"RAWDOC()RAWDOC", /* module documentation, may be NULL */
                                         -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
                                         module_methods,
                                         NULL,

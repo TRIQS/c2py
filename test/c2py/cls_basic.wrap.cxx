@@ -4,8 +4,10 @@
 #ifdef __clang__
 #pragma clang diagnostic ignored "-W#warnings"
 #endif
-#include "cls_basic.cpp"
+#define C2PY_VERSION_MAJOR 0
+#define C2PY_VERSION_MINOR 1
 #include "c2py/c2py.hpp"
+#include "cls_basic.cpp"
 
 using c2py::operator"" _a;
 
@@ -33,32 +35,37 @@ static auto const fun_0 =
 
 template <> inline constexpr ternaryfunc c2py::tp_call<A> = c2py::pyfkw<fun_0>;
 
+// clone
+static auto const fun_1 = c2py::dispatcher_f_kw_t{c2py::cmethod(&c2py::clone<A>, "x")};
+
 // f
-static auto const fun_1 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castmc<int>(&A::f), "x")};
+static auto const fun_2 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castmc<int>(&A::f), "x")};
 
 // f_w_alias
-static auto const fun_2 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castmc<long>(&A::f_w_alias), "i")};
+static auto const fun_3 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castmc<long>(&A::f_w_alias), "i")};
 
 // h
-static auto const fun_3 = c2py::dispatcher_f_kw_t{c2py::cmethod(c2py::cast<const A &, int>(&hhh), "a", "j")};
+static auto const fun_4 = c2py::dispatcher_f_kw_t{c2py::cmethod(c2py::cast<const A &, int>(&hhh), "a", "j")};
 
 // no_prop
-static auto const fun_4         = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castm<>(&A::no_prop))};
+static auto const fun_5         = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castm<>(&A::no_prop))};
 static constexpr auto doc_f_0_0 = R"DOC(   )DOC";
 static constexpr auto doc_f_0_1 = R"DOC(   )DOC";
 static const auto doc_d_0       = fun_0.doc({doc_f_0_0, doc_f_0_1});
-static const auto doc_d_1       = fun_1.doc({R"DOC(   )DOC"});
+static const auto doc_d_1       = fun_1.doc({R"DOC(   To make a clone function)DOC"});
 static const auto doc_d_2       = fun_2.doc({R"DOC(   )DOC"});
 static const auto doc_d_3       = fun_3.doc({R"DOC(   )DOC"});
 static const auto doc_d_4       = fun_4.doc({R"DOC(   )DOC"});
+static const auto doc_d_5       = fun_5.doc({R"DOC(   )DOC"});
 
 // ----- Method table ----
 template <>
 PyMethodDef c2py::tp_methods<A>[] = {
-   {"f", (PyCFunction)c2py::pyfkw<fun_1>, METH_VARARGS | METH_KEYWORDS, doc_d_1.c_str()},
-   {"f_w_alias", (PyCFunction)c2py::pyfkw<fun_2>, METH_VARARGS | METH_KEYWORDS, doc_d_2.c_str()},
-   {"h", (PyCFunction)c2py::pyfkw<fun_3>, METH_VARARGS | METH_KEYWORDS, doc_d_3.c_str()},
-   {"no_prop", (PyCFunction)c2py::pyfkw<fun_4>, METH_VARARGS | METH_KEYWORDS, doc_d_4.c_str()},
+   {"clone", (PyCFunction)c2py::pyfkw<fun_1>, METH_VARARGS | METH_KEYWORDS, doc_d_1.c_str()},
+   {"f", (PyCFunction)c2py::pyfkw<fun_2>, METH_VARARGS | METH_KEYWORDS, doc_d_2.c_str()},
+   {"f_w_alias", (PyCFunction)c2py::pyfkw<fun_3>, METH_VARARGS | METH_KEYWORDS, doc_d_3.c_str()},
+   {"h", (PyCFunction)c2py::pyfkw<fun_4>, METH_VARARGS | METH_KEYWORDS, doc_d_4.c_str()},
+   {"no_prop", (PyCFunction)c2py::pyfkw<fun_5>, METH_VARARGS | METH_KEYWORDS, doc_d_5.c_str()},
    {"__getstate__", c2py::getstate_tuple<A>, METH_NOARGS, ""},
    {"__setstate__", c2py::setstate_tuple<A>, METH_O, ""},
    {nullptr, nullptr, 0, nullptr} // Sentinel
@@ -98,13 +105,13 @@ template <> inline constexpr const char *c2py::tp_doc<dummy_class> = R"DOC(   te
 static auto init_1                                        = c2py::dispatcher_c_kw_t{c2py::c_constructor<dummy_class>()};
 template <> constexpr initproc c2py::tp_init<dummy_class> = c2py::pyfkw_constructor<init_1>;
 // do_thing
-static auto const fun_5   = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castm<double>(&dummy_class::do_thing), "x")};
-static const auto doc_d_5 = fun_5.doc({R"DOC(   )DOC"});
+static auto const fun_6   = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::castm<double>(&dummy_class::do_thing), "x")};
+static const auto doc_d_6 = fun_6.doc({R"DOC(   )DOC"});
 
 // ----- Method table ----
 template <>
 PyMethodDef c2py::tp_methods<dummy_class>[] = {
-   {"do_thing", (PyCFunction)c2py::pyfkw<fun_5>, METH_VARARGS | METH_KEYWORDS, doc_d_5.c_str()},
+   {"do_thing", (PyCFunction)c2py::pyfkw<fun_6>, METH_VARARGS | METH_KEYWORDS, doc_d_6.c_str()},
    {nullptr, nullptr, 0, nullptr} // Sentinel
 };
 
@@ -118,23 +125,23 @@ constinit PyGetSetDef c2py::tp_getset<dummy_class>[] = {
 // ==================== module functions ====================
 
 // a_friend
-static auto const fun_6 = c2py::dispatcher_f_kw_t{c2py::cfun([](const A &a) { return a_friend(a); }, "a")};
+static auto const fun_7 = c2py::dispatcher_f_kw_t{c2py::cfun([](const A &a) { return a_friend(a); }, "a")};
 
 // hhh
-static auto const fun_7 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<const A &, int>(&hhh), "a", "j")};
+static auto const fun_8 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<const A &, int>(&hhh), "a", "j")};
 
 // maker_A
-static auto const fun_8 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<int>(&maker_A), "i")};
+static auto const fun_9 = c2py::dispatcher_f_kw_t{c2py::cfun(c2py::cast<int>(&maker_A), "i")};
 
-static const auto doc_d_6 = fun_6.doc({R"DOC(   )DOC"});
 static const auto doc_d_7 = fun_7.doc({R"DOC(   )DOC"});
 static const auto doc_d_8 = fun_8.doc({R"DOC(   )DOC"});
+static const auto doc_d_9 = fun_9.doc({R"DOC(   )DOC"});
 //--------------------- module function table  -----------------------------
 
 static PyMethodDef module_methods[] = {
-   {"a_friend", (PyCFunction)c2py::pyfkw<fun_6>, METH_VARARGS | METH_KEYWORDS, doc_d_6.c_str()},
-   {"hhh", (PyCFunction)c2py::pyfkw<fun_7>, METH_VARARGS | METH_KEYWORDS, doc_d_7.c_str()},
-   {"maker_A", (PyCFunction)c2py::pyfkw<fun_8>, METH_VARARGS | METH_KEYWORDS, doc_d_8.c_str()},
+   {"a_friend", (PyCFunction)c2py::pyfkw<fun_7>, METH_VARARGS | METH_KEYWORDS, doc_d_7.c_str()},
+   {"hhh", (PyCFunction)c2py::pyfkw<fun_8>, METH_VARARGS | METH_KEYWORDS, doc_d_8.c_str()},
+   {"maker_A", (PyCFunction)c2py::pyfkw<fun_9>, METH_VARARGS | METH_KEYWORDS, doc_d_9.c_str()},
    {nullptr, nullptr, 0, nullptr} // Sentinel
 };
 
@@ -143,8 +150,12 @@ static PyMethodDef module_methods[] = {
 //// module doc directly in the code or "" if not present...
 /// Or mandatory ?
 static struct PyModuleDef module_def = {PyModuleDef_HEAD_INIT,
-                                        "cls_basic",  /* name of module */
-                                        "DOC MODULE", /* module documentation, may be NULL */
+                                        "cls_basic", /* name of module */
+                                        R"RAWDOC(
+  A long documentation of this nice module
+  with multiple lines
+  etc...
+  )RAWDOC",                                          /* module documentation, may be NULL */
                                         -1, /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
                                         module_methods,
                                         NULL,
