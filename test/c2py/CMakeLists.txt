@@ -28,15 +28,6 @@ c2py_add_test_1(${modulename} $<IF:$<TARGET_EXISTS:clair::c2py_plugin>,cpp,wrap.
   target_link_libraries(${modulename} PRIVATE $<TARGET_NAME_IF_EXISTS:clair::c2py_plugin>)
 endmacro()
 
-# # TEST 
-
-# Python_add_library( BBB MODULE basicfun.cpp)
-# target_compile_options(BBB PRIVATE -std=c++20 -DBLABLALBA)
-# target_include_directories(BBB SYSTEM PRIVATE  ${CMAKE_SOURCE_DIR}/src)
-# target_link_libraries(BBB PRIVATE c2py ${PROJECT_NAME}_warnings itertools::itertools_c Python::NumPy)
-
-# set_property(TARGET BBB PROPERTY EXCLUDE_FROM_ALL TRUE)
-
 #--------------------------------------------------------
 #  A target to copy the wrap.cxx files back to the src
 #--------------------------------------------------------

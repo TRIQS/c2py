@@ -36,6 +36,7 @@ namespace N1 {
     int i;
 
     /// A double
+    /// with a long doc
     double x = 10;
 
     /// A non default constructible object
