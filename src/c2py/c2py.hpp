@@ -1,4 +1,13 @@
 #pragma once
+
+#define C2PY_VERSION_MAJOR_CURRENT 0
+#define C2PY_VERSION_MINOR_CURRENT 1
+#ifdef C2PY_VERSION_MAJOR
+#if (C2PY_VERSION_MAJOR != C2PY_VERSION_MAJOR_CURRENT) or (C2PY_VERSION_MINOR != C2PY_VERSION_MINOR_CURRENT)
+#error "c2py bindings have been generated for a different version of c2py compared to the one included."
+#endif
+#endif
+
 #include <Python.h>
 #include <type_traits>
 
